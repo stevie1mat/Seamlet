@@ -1,0 +1,18 @@
+# Generated builds and SDK caches
+/build/
+**/bin/
+**/obj/
+.build/
+
+# Local machine/editor files
+.DS_Store
+.vs/
+.idea/
+
+# Local credentials and environment overrides
+.env
+.env.*
+!.env.example
+
+# Unused placeholder from initial project setup
+/index.html
