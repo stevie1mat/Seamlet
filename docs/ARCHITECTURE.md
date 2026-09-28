@@ -1,7 +1,6 @@
 # How Seamlet works
 
-Seamlet is a native Windows controller and Mac receiver. The project was originally
-called MultipleMouse; several internal identifiers retain that name for compatibility.
+Seamlet is a native Windows controller and Mac receiver.
 The app bundles are `Seamlet.app` and `Seamlet.exe`.
 
 ## Input and pairing
@@ -25,8 +24,7 @@ short, guessable codes resistant to all guessing attacks.
 Windows broadcasts discovery requests to UDP 24873; Mac replies with its name and
 IPv4 endpoint. A scan lasts three seconds and deduplicates responses by address.
 Discovery does not broadcast the pairing code or establish an authenticated session.
-The control connection still requires pairing. The service identifier remains
-`MultipleMouse` so compatible existing peers can discover each other.
+The control connection still requires pairing.
 
 ## Screen entry and return
 
@@ -80,7 +78,7 @@ pasteboard or a file-drop list on the Windows clipboard. Unsafe names, duplicate
 and symbolic links are rejected. Files are transferred as bytes and never executed.
 
 Each transfer stages files in a unique directory under the OS temporary folder's
-`MultipleMouse-Files` directory. Interrupted or invalid partial transfers are removed.
+`Seamlet-Files` directory. Interrupted or invalid partial transfers are removed.
 Finished copies remain there so repeated pastes work after disconnecting. Subsequent
 connections clean up copies older than 24 hours, except those referenced by the current
 clipboard. Source files are not removed or moved.

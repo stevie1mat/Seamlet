@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 
-namespace MultipleMouse;
+namespace Seamlet;
 
 sealed class FileWire : IDisposable
 {
@@ -42,7 +42,7 @@ static class FileTransfer
 {
     public const long MaxBytes = 1024L * 1024 * 1024;
     public const int ChunkSize = 32768;
-    public static string CacheRoot => Path.Combine(Path.GetTempPath(), "MultipleMouse-Files");
+    public static string CacheRoot => Path.Combine(Path.GetTempPath(), "Seamlet-Files");
     public static void CleanOldCache(string[] clipboardPaths)
     {
         var keep = clipboardPaths.Select(Path.GetDirectoryName).ToHashSet(StringComparer.OrdinalIgnoreCase);

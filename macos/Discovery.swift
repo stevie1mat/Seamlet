@@ -45,13 +45,13 @@ final class DiscoveryResponder {
             if count < 0 { return }
             guard count <= 1024, remote.sin_family == sa_family_t(AF_INET), remote.sin_port != 0,
                   let query = try? JSONSerialization.jsonObject(with: Data(bytes.prefix(count))) as? [String: Any],
-                  query["service"] as? String == "MultipleMouse", query["v"] as? Int == 1,
+                  query["service"] as? String == "Seamlet", query["v"] as? Int == 1,
                   query["type"] as? String == "discover", let nonce = query["nonce"] as? String,
                   nonce.count == 32, nonce.utf8.allSatisfy({ (48...57).contains($0) || (97...102).contains($0) }) else { continue }
             let now = ProcessInfo.processInfo.systemUptime
             if now - windowStart >= 1 { windowStart = now; replies = 0 }
             guard replies < 20 else { continue }; replies += 1
-            guard let response = try? JSONSerialization.data(withJSONObject: ["service": "MultipleMouse", "v": 1, "type": "offer", "nonce": nonce, "name": name]) else { continue }
+            guard let response = try? JSONSerialization.data(withJSONObject: ["service": "Seamlet", "v": 1, "type": "offer", "nonce": nonce, "name": name]) else { continue }
             response.withUnsafeBytes { data in
                 _ = withUnsafePointer(to: &remote) {
                     $0.withMemoryRebound(to: sockaddr.self, capacity: 1) { sendto(socketFD, data.baseAddress, data.count, 0, $0, size) }

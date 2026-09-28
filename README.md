@@ -64,7 +64,7 @@ Move your mouse through the configured Windows screen edge. Move through the adj
 - **Stop sharing:** click **Disconnect** on Windows, **Stop receiving** on Mac, or close either app.
 - **Dragging:** release held mouse buttons before crossing. Drags stay on the computer where they began.
 
-Pairing codes are not saved. Enter your code again when reopening the apps. If upgrading from MultipleMouse, quit the old apps first and run only one version per computer.
+Pairing codes are not saved. Enter your code again when reopening the apps.
 
 ## Copy here. Paste there.
 
@@ -107,7 +107,7 @@ Output: **`build/Seamlet.app`**. The script applies a local ad-hoc signature; th
 ### Windows — build on macOS or Windows
 
 ```sh
-dotnet publish windows/MultipleMouse.csproj \
+dotnet publish windows/Seamlet.csproj \
   -c Release -r win-x64 --self-contained true \
   -p:PublishSingleFile=true -o build/windows
 ```
@@ -118,7 +118,7 @@ Or, from PowerShell on Windows:
 .\scripts\build-windows.ps1
 ```
 
-Output: **`build/windows/Seamlet.exe`**. Copy it to the Windows computer to run it. The project file retains the original MultipleMouse name; the application is named Seamlet.
+Output: **`build/windows/Seamlet.exe`**. Copy it to the Windows computer to run it.
 
 ### Icons and branding
 

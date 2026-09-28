@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0"><dict>
 <key>CFBundleExecutable</key><string>Seamlet</string>
-<key>CFBundleIdentifier</key><string>local.multiplemouse.receiver</string>
+<key>CFBundleIdentifier</key><string>local.seamlet.receiver</string>
 <key>CFBundleName</key><string>Seamlet</string>
 <key>CFBundleDisplayName</key><string>Seamlet</string>
 <key>CFBundleIconFile</key><string>Seamlet</string>

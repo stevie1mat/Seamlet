@@ -2,7 +2,7 @@
 
 **A little less between you and your screens.**
 
-Seamlet is the new product name for MultipleMouse. The name draws on the seam between
+Seamlet is a small utility that makes crossing the seam between
 screens and a small utility that makes crossing it feel natural. The app shares a
 Windows-connected mouse and plain text/files with a Mac on the local network.
 
@@ -42,6 +42,6 @@ from live status. The two-screen diagram reflects the configured side and connec
 Windows keeps scrolling available on shorter displays and uses DPI scaling.
 
 The macOS bundle identifier, encrypted wire protocol identifiers, discovery service,
-and temporary transfer-cache path remain compatible with earlier MultipleMouse builds.
-The user-facing bundles are now `build/Seamlet.app` and `build/windows/Seamlet.exe`.
+and temporary transfer-cache path all use the Seamlet name.
+The user-facing bundles are `build/Seamlet.app` and `build/windows/Seamlet.exe`.
 Run only one version on each computer.

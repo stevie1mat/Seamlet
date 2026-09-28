@@ -50,7 +50,7 @@ struct FileEntry: Codable {
 enum FileTransfer {
     static let maxBytes: Int64 = 1024 * 1024 * 1024
     static let chunkSize = 32768
-    static let cacheRoot = FileManager.default.temporaryDirectory.appendingPathComponent("MultipleMouse-Files", isDirectory: true)
+    static let cacheRoot = FileManager.default.temporaryDirectory.appendingPathComponent("Seamlet-Files", isDirectory: true)
     static func cleanOldCache(keeping paths: [URL]) {
         let keep = Set(paths.map { $0.deletingLastPathComponent().path })
         guard let folders = try? FileManager.default.contentsOfDirectory(at: cacheRoot, includingPropertiesForKeys: [.isDirectoryKey, .isSymbolicLinkKey, .contentModificationDateKey]) else { return }

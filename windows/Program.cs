@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
-namespace MultipleMouse;
+namespace Seamlet;
 
 static class Program
 {

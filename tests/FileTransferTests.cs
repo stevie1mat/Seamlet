@@ -1,4 +1,4 @@
-using MultipleMouse;
+using Seamlet;
 using System.Diagnostics;
 using System.Net.Sockets;
 using System.Security.Cryptography;
@@ -17,7 +17,7 @@ static class FileTransferTests
             if (FileTransfer.ValidName(name)) throw new Exception("Unsafe name accepted: " + name);
         await Reject(() => { FileTransfer.Validate([new("a", 1), new("A", 2)]); return Task.CompletedTask; });
         await Reject(() => { FileTransfer.Validate([new("big", FileTransfer.MaxBytes + 1)]); return Task.CompletedTask; });
-        string root = Path.Combine(Path.GetTempPath(), "MultipleMouse-Test-" + Guid.NewGuid().ToString("N"));
+        string root = Path.Combine(Path.GetTempPath(), "Seamlet-Test-" + Guid.NewGuid().ToString("N"));
         string source = Path.Combine(root, "source"); Directory.CreateDirectory(source);
         var payloads = new Dictionary<string, byte[]> { ["empty.txt"] = [], ["café.txt"] = System.Text.Encoding.UTF8.GetBytes("Copy and paste — both ways."), ["binary.bin"] = RandomNumberGenerator.GetBytes(2 * 1024 * 1024 + 17) };
         foreach (var pair in payloads) await File.WriteAllBytesAsync(Path.Combine(source, pair.Key), pair.Value);

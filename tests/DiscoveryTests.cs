@@ -1,4 +1,4 @@
-using MultipleMouse;
+using Seamlet;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
@@ -11,10 +11,10 @@ static class DiscoveryTests
     {
         string nonce = new('a', 32);
         var sender = new IPEndPoint(IPAddress.Loopback, 24873);
-        byte[] offer = JsonSerializer.SerializeToUtf8Bytes(new { service = "MultipleMouse", v = 1, type = "offer", nonce, name = "Mac", address = "fake-address" });
+        byte[] offer = JsonSerializer.SerializeToUtf8Bytes(new { service = "Seamlet", v = 1, type = "offer", nonce, name = "Mac", address = "fake-address" });
         if (Discovery.Parse(offer, sender, nonce)?.Address != "127.0.0.1") throw new Exception("Wrong discovery address.");
         if (Discovery.Parse(offer, sender, new string('b', 32)) != null) throw new Exception("Stale response accepted.");
-        foreach (var input in new[] { "{}", "null", "[]", "broken", new string('x', 1025), Encoding.UTF8.GetString(offer).Replace("MultipleMouse", "OtherApp"), Encoding.UTF8.GetString(offer).Replace("\"v\":1", "\"v\":2") })
+        foreach (var input in new[] { "{}", "null", "[]", "broken", new string('x', 1025), Encoding.UTF8.GetString(offer).Replace("Seamlet", "OtherApp"), Encoding.UTF8.GetString(offer).Replace("\"v\":1", "\"v\":2") })
             if (Discovery.Parse(Encoding.UTF8.GetBytes(input), sender, nonce) != null) throw new Exception("Invalid discovery accepted.");
         Console.WriteLine("PASS: discovery validation, stale response rejection, sender address selection.");
         using var process = Process.Start(new ProcessStartInfo(hostExecutable) { RedirectStandardOutput = true, UseShellExecute = false })!;

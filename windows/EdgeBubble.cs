@@ -3,7 +3,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
-namespace MultipleMouse;
+namespace Seamlet;
 
 // A separate UI thread keeps animation paints and GDI work out of the mouse hook.
 sealed class EdgeBubble : IDisposable
@@ -19,7 +19,7 @@ sealed class EdgeBubble : IDisposable
             Volatile.Write(ref window, form);
             if (!disposed) Application.Run();
             Volatile.Write(ref window, null);
-        }) { IsBackground = true, Name = "MultipleMouse edge animation" };
+        }) { IsBackground = true, Name = "Seamlet edge animation" };
         thread.SetApartmentState(ApartmentState.STA); thread.Start();
     }
     public void Play(Rectangle screen, bool right, int y)

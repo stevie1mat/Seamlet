@@ -13,7 +13,7 @@ final class Wire {
         let normalized = code.trimmingCharacters(in: CharacterSet(charactersIn: " \t\r\n")).precomposedStringWithCanonicalMapping
         let password = Array(normalized.utf8)
         guard !password.isEmpty, password.count <= 256 else { throw WireError.invalid }
-        let salt = Array("MultipleMouse/pairing-code/v1".utf8)
+        let salt = Array("Seamlet/pairing-code/v1".utf8)
         var result = [UInt8](repeating: 0, count: 32)
         let status = password.withUnsafeBytes { bytes in
             salt.withUnsafeBufferPointer { saltBytes in
@@ -32,7 +32,7 @@ final class Wire {
     init(token: Data, client: Data, server: Data, isServer: Bool) throws {
         guard token.count == 32, client.count == 32, server.count == 32 else { throw WireError.invalid }
         func key(_ direction: String) -> SymmetricKey {
-            let material = Data(("MultipleMouse/1/" + direction).utf8) + client + server
+            let material = Data(("Seamlet/1/" + direction).utf8) + client + server
             return SymmetricKey(data: Data(HMAC<SHA256>.authenticationCode(for: material, using: SymmetricKey(data: token))))
         }
         outgoing = key(isServer ? "s2c" : "c2s")

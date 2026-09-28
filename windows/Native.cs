@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace MultipleMouse;
+namespace Seamlet;
 
 static class Native
 {

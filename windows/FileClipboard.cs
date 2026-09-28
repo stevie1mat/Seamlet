@@ -1,7 +1,7 @@
 using System.Collections.Specialized;
 using System.Runtime.InteropServices;
 
-namespace MultipleMouse;
+namespace Seamlet;
 
 // Created/ticked on the UI (STA) thread. Disk and network work runs separately.
 sealed class FileClipboard : IDisposable
@@ -93,7 +93,7 @@ sealed class FileClipboard : IDisposable
                 // on WinForms' default clipboard retries. This format cannot be pasted as a file.
                 baseline = await Publish(operation, baseline, () =>
                 {
-                    var pending = new DataObject(); pending.SetData("MultipleMouse.PendingFiles", id); return pending;
+                    var pending = new DataObject(); pending.SetData("Seamlet.PendingFiles", id); return pending;
                 });
                 if (isText)
                 {

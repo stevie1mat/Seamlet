@@ -4,7 +4,7 @@ using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text.Json;
 
-namespace MultipleMouse;
+namespace Seamlet;
 
 sealed record DiscoveredDevice(string Name, string Address)
 {
@@ -20,7 +20,7 @@ static class Discovery
         {
             using var document = JsonDocument.Parse(bytes);
             var root = document.RootElement;
-            if (root.GetProperty("service").GetString() != "MultipleMouse" || root.GetProperty("v").GetInt32() != 1 ||
+            if (root.GetProperty("service").GetString() != "Seamlet" || root.GetProperty("v").GetInt32() != 1 ||
                 root.GetProperty("type").GetString() != "offer" || root.GetProperty("nonce").GetString() != nonce) return null;
             string? name = root.GetProperty("name").GetString();
             if (string.IsNullOrWhiteSpace(name) || name.Length > 160 || name.Any(char.IsControl)) return null;
@@ -53,7 +53,7 @@ static class Discovery
         using var deadline = CancellationTokenSource.CreateLinkedTokenSource(cancellation);
         deadline.CancelAfter(duration ?? TimeSpan.FromSeconds(3));
         string nonce = Convert.ToHexString(RandomNumberGenerator.GetBytes(16)).ToLowerInvariant();
-        byte[] query = JsonSerializer.SerializeToUtf8Bytes(new { service = "MultipleMouse", v = 1, type = "discover", nonce });
+        byte[] query = JsonSerializer.SerializeToUtf8Bytes(new { service = "Seamlet", v = 1, type = "discover", nonce });
         targets ??= BroadcastTargets();
         var unique = new HashSet<string>();
         var sending = Task.Run(async () =>

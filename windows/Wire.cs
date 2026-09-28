@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 
-namespace MultipleMouse;
+namespace Seamlet;
 
 sealed class Wire : IDisposable
 {
@@ -11,14 +11,14 @@ sealed class Wire : IDisposable
     {
         byte[] password = Encoding.UTF8.GetBytes(code.Trim(' ', '\t', '\r', '\n').Normalize(NormalizationForm.FormC));
         if (password.Length == 0 || password.Length > 256) throw new ArgumentException("Enter a pairing code (up to 256 UTF-8 bytes).");
-        return Rfc2898DeriveBytes.Pbkdf2(password, Encoding.UTF8.GetBytes("MultipleMouse/pairing-code/v1"), 600_000, HashAlgorithmName.SHA256, 32);
+        return Rfc2898DeriveBytes.Pbkdf2(password, Encoding.UTF8.GetBytes("Seamlet/pairing-code/v1"), 600_000, HashAlgorithmName.SHA256, 32);
     }
     readonly AesGcm outgoing, incoming;
     ulong sent, received;
     public Wire(byte[] token, byte[] client, byte[] server, bool isServer = false)
     {
         if (token.Length != 32 || client.Length != 32 || server.Length != 32) throw new InvalidDataException("Invalid pairing key or nonce.");
-        byte[] Key(string direction) => HMACSHA256.HashData(token, Encoding.UTF8.GetBytes("MultipleMouse/1/" + direction).Concat(client).Concat(server).ToArray());
+        byte[] Key(string direction) => HMACSHA256.HashData(token, Encoding.UTF8.GetBytes("Seamlet/1/" + direction).Concat(client).Concat(server).ToArray());
         outgoing = new AesGcm(Key(isServer ? "s2c" : "c2s"), 16);
         incoming = new AesGcm(Key(isServer ? "c2s" : "s2c"), 16);
     }

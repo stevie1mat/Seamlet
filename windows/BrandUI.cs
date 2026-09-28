@@ -1,7 +1,7 @@
 using System.Drawing.Drawing2D;
 using System.Reflection;
 
-namespace MultipleMouse;
+namespace Seamlet;
 
 static class BrandUI
 {
@@ -11,7 +11,7 @@ static class BrandUI
     public static readonly Color Paper = Color.FromArgb(244, 243, 238);
     public static Label Label(string text, float size = 10, bool bold = false, int height = 20) => new()
     {
-        Text = text, Width = 620, Height = height, ForeColor = Muted,
+        Text = text, Width = 620, Height = height, ForeColor = Muted, UseMnemonic = false,
         Font = new Font("Segoe UI", size, bold ? FontStyle.Bold : FontStyle.Regular), Margin = new Padding(0)
     };
     public static void Button(Button button, bool primary = false)
@@ -33,11 +33,13 @@ static class BrandUI
     public static DeskPreview Build(Form form, ComboBox host, Button refresh, Label discovery, TextBox key,
         ComboBox side, Button connect, Label status, Label clipboard, Label handoff)
     {
-        form.Text = "Seamlet"; form.ClientSize = new Size(704, 850); form.MinimumSize = new Size(720, 600);
+        form.Text = "Seamlet"; form.MinimumSize = new Size(720, 600);
         form.AutoScaleMode = AutoScaleMode.Dpi; form.AutoScaleDimensions = new SizeF(96, 96);
         form.BackColor = Paper; form.ForeColor = Ink; form.Font = new Font("Segoe UI", 10);
-        form.StartPosition = FormStartPosition.CenterScreen; form.MaximizeBox = false;
-        form.FormBorderStyle = FormBorderStyle.FixedSingle;
+        form.StartPosition = FormStartPosition.CenterScreen;
+        form.FormBorderStyle = FormBorderStyle.Sizable;
+        var workArea = Screen.PrimaryScreen!.WorkingArea;
+        form.ClientSize = new Size(704, Math.Min(850, workArea.Height - SystemInformation.CaptionHeight - SystemInformation.FrameBorderSize.Height * 2));
         using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Seamlet.ico"))
             if (stream != null) { using var icon = new Icon(stream); form.Icon = (Icon)icon.Clone(); }
         var scroll = new Panel { Dock = DockStyle.Fill, AutoScroll = true };

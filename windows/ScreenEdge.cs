@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace MultipleMouse;
+namespace Seamlet;
 
 static class ScreenEdge
 {

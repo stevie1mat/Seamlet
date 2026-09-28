@@ -5,7 +5,7 @@ using System.Text.Json;
 using System.Threading.Channels;
 using System.Diagnostics;
 
-namespace MultipleMouse;
+namespace Seamlet;
 
 sealed class Link : IDisposable
 {
